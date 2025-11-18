@@ -5,12 +5,14 @@ from transformers import pipeline
 
 # Create separate functions for each NLP task
 def summarize_text(input_text):
-    summarizer = pipeline("summarization")
+    # Specify the default model to remove the warning
+    summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
     summary = summarizer(input_text, max_length=150, min_length=50, length_penalty=2.0)[0]['summary_text']
     return summary
 
 def classify_text(input_text):
-    classifier = pipeline("sentiment-analysis")
+    # Specify the default model to remove the warning
+    classifier = pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english")
     classification = classifier(input_text)[0]['label']
     return classification
 
